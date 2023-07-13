@@ -2,31 +2,14 @@
 <html>
   <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
-    <div class="container">
-      <h1>Login</h1>
-      <form action="/login" method="POST">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Enter your username"
-        />
-
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Enter your password"
-        />
-
-        <button type="submit">Login</button>
-      </form>
-    </div>
-    <script src="server.js"></script>
+    <h1>Login</h1>
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="Username" required><br>
+      <input type="password" name="password" placeholder="Password" required><br>
+      <input type="submit" value="Login">
+    </form>
   </body>
 </html>
