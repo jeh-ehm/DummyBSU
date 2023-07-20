@@ -10,6 +10,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
 
+app.use(express.static('public'))
+
 // Set up a basic route
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -45,16 +47,21 @@ app.post('/api/login', (req, res) => {
   const greeting = {greeting: "Login Success!"};
   const alert = {greeting: "Invalid pass!"};
 
+
   // Query the database to check if the provided username and password match a record
   const query = 'SELECT * FROM user WHERE username = ? AND password = ?';
   connection.query(query, [username, password], (error, results) => {
+    console.log(username, password);
     if (error) {
       console.error('Error executing the database query: ' + error.stack);
       return;
     }
 
     if (results.length > 0) {
-      res.send(greeting);
+      res.send({
+        status: "OK", 
+        name: results[0].name
+      });
     } else {
       console.log('Invalid username or password');
       res.send(alert);
@@ -75,7 +82,7 @@ app.post('/login', (req, res ) => {
     }
 
     if (result.length > 0) {
-      res.send("Login Successfully");
+      res.send("Login Successfully!");
     } else {
       res.send("Invalid username or password");
     }
